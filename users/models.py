@@ -1,6 +1,6 @@
 from django.db import models
 from django.apps import apps
-from constants import USER_ROLES, MEMBER, ADMIN
+from constants import USER_ROLES, MEMBER, ADMIN, NULLABLE
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
@@ -42,6 +42,7 @@ class User(AbstractUser):
 
     email = models.EmailField(unique=True, verbose_name='почта')
     is_active = models.BooleanField(default=True, verbose_name='активен')
+    key = models.CharField(max_length=100, **NULLABLE, verbose_name='ключ')
     role = models.CharField(max_length=20,
                             choices=USER_ROLES.items(), default=MEMBER,
                             verbose_name='роль')

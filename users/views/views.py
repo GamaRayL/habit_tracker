@@ -6,6 +6,7 @@ from rest_framework_simplejwt.views import TokenObtainPairView
 from users.models import User
 from users.serializers.token_obtain import MyTokenObtainPairSerializer
 from users.serializers.user import UserSerializer
+import uuid
 
 
 class MyTokenObtainPairAPIView(TokenObtainPairView):
@@ -28,3 +29,7 @@ class UserRegisterAPIView(CreateAPIView):
         # )
         #
         # serializer.save(email=user.email, password=user.password)
+
+
+def verify_email(request, key):
+    user = User.objects.get(key=key)

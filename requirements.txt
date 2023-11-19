@@ -1,6 +1,7 @@
 django
 psycopg2-binary
 djangorestframework
+djangorestframework-simplejwt
 celery
 redis
 django-cors-headers

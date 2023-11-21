@@ -5,8 +5,9 @@ from constants import FREQUENCY, DAILY, NULLABLE
 
 class Habit(models.Model):
     """Модель привычки"""
-    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='пользователь',
-                             help_text='Создатель привычки')
+    user = models.ForeignKey(User, on_delete=models.CASCADE,
+                             **NULLABLE, related_name='habits',
+                             verbose_name='пользователь', help_text='Создатель привычки')
     place = models.CharField(max_length=50, verbose_name='место',
                              help_text='Место, в котором необходимо выполнять привычку')
     time_to_start = models.TimeField(verbose_name='время начала',
@@ -25,7 +26,8 @@ class Habit(models.Model):
                                  choices=FREQUENCY.items(), default=DAILY,
                                  verbose_name='периодичность',
                                  help_text='Периодичность выполнения привычки для напоминания в днях')
-    reward = models.CharField(max_length=100, verbose_name='вознаграждение',
+    reward = models.CharField(max_length=100, **NULLABLE,
+                              verbose_name='вознаграждение',
                               help_text='Чем пользователь должен себя вознаградить после выполнения')
     time_to_complete = models.TimeField(verbose_name='время на выполнение',
                                         help_text='Время, которое предположительно потратит пользователь на '

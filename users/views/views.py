@@ -22,17 +22,19 @@ class UserRegisterAPIView(CreateAPIView):
     serializer_class = UserSerializer
 
     def create(self, request, *args, **kwargs):
+        """Создание пользователя и передача в сервисный слой адреса для подтверждения почты пользователя."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = self.perform_create(serializer)
 
         verify_email_url = reverse('users:verify_email', args=[user.key])
         absolute_verify_email_url = request.build_absolute_uri(verify_email_url)
-        send_confirm_register_mail(self, user, absolute_verify_email_url)
+        send_confirm_register_mail(user, absolute_verify_email_url)
 
         return Response({'message': 'Пользователь успешно создан'}, status=status.HTTP_201_CREATED)
 
     def perform_create(self, serializer):
+        """Сохранение пользователя в базе данных."""
         user = serializer.save()
         user.set_password(serializer.validated_data['password'])
         user.key = uuid.uuid4()

@@ -1,15 +1,17 @@
 from django.conf import settings
-from django.contrib.sites.shortcuts import get_current_site
-from django.core.mail import send_mail
+from django.core.mail import EmailMessage
 
 
 def send_confirm_register_mail(user, absolute_verify_email_url):
+    """Отправка письма со ссылкой для подтверждения почты пользователя"""
+    message = (f'Вы зарегистрировались на нашей платформе. Для продолжения регистрации перейдите по '
+               f'<a href="{absolute_verify_email_url}">ссылке</a>')
 
-    send_mail(
+    email = EmailMessage(
         subject='Поздравляем с регистрацией',
-        message=f'Вы зарегистрировались на нашей платформе. '
-                f'Для продолжения регистрации перейдите по ссылке '
-                f'{absolute_verify_email_url}',
+        body=message,
         from_email=settings.EMAIL_HOST_USER,
-        recipient_list=[user.email]
+        to=[user.email],
     )
+    email.content_subtype = 'html'
+    email.send()

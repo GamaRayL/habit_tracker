@@ -1,6 +1,8 @@
 from main.models import Habit
 from rest_framework import status
 from rest_framework.response import Response
+
+from main.permissions.is_owner import IsOwner
 from main.serializers.habit_serializer import HabitSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
 from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
@@ -38,11 +40,14 @@ class HabitUpdateAPIView(UpdateAPIView):
     """Редактирование привычки."""
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+    permission_classes = [IsOwner]
+#     Каждый пользователь имеет доступ только к своим привычкам по механизму CRUD.
 
 
 class HabitDeleteAPIView(DestroyAPIView):
     """Удаление привычки."""
     queryset = Habit.objects.all()
+    permission_classes = [IsOwner]
 
     def delete(self, request, *args, **kwargs):
         habit = self.get_object()

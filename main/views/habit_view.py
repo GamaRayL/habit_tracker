@@ -1,7 +1,10 @@
+from rest_framework import status
+from rest_framework.response import Response
+
 from main.models import Habit
 from main.serializers.habit_serializer import HabitSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView
+from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
 
 class HabitCurrentUserListAPIView(ListAPIView):
@@ -34,3 +37,13 @@ class HabitUpdateAPIView(UpdateAPIView):
     """Редактирование привычки."""
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+
+
+class HabitDeleteAPIView(DestroyAPIView):
+    """Удаление привычки."""
+    queryset = Habit.objects.all()
+
+    def delete(self, request, *args, **kwargs):
+        habit = self.get_object()
+        habit.delete()
+        return Response({'message': 'Привычка удалена.'}, status=status.HTTP_204_NO_CONTENT)

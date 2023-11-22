@@ -1,3 +1,5 @@
+from django.http import request
+
 from main.models import Habit
 from rest_framework import status
 from rest_framework.response import Response
@@ -7,6 +9,8 @@ from main.serializers.habit_serializer import HabitListSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
 from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
+
+from main.services.send_msg_to_tg import send_msg_to_tg
 
 
 class HabitCurrentUserListAPIView(ListAPIView):
@@ -31,6 +35,8 @@ class HabitPublicListAPIView(ListAPIView):
 class HabitCreateAPIView(CreateAPIView):
     """Добавление новой привычки."""
     serializer_class = HabitCreateSerializer
+    bot_token = '6795892672:AAEuABnRXf7MIXPhUMXqSl2rtMOdhaq8Mfg'
+    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
@@ -41,7 +47,9 @@ class HabitUpdateAPIView(UpdateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitListSerializer
     permission_classes = [IsOwner]
-#     Каждый пользователь имеет доступ только к своим привычкам по механизму CRUD.
+
+    def perform_update(self, serializer):
+        send_msg_to_tg()
 
 
 class HabitDeleteAPIView(DestroyAPIView):

@@ -4,6 +4,7 @@ djangorestframework
 djangorestframework-simplejwt
 celery
 redis
+requests
 django-cors-headers
 python-dotenv
 drf-yasg

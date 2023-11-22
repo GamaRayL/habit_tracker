@@ -1,17 +1,16 @@
-from rest_framework.serializers import ValidationError
-
 from main.models import Habit
+from rest_framework.serializers import ValidationError
 
 
 class HabitValidator:
     """Валидатор привычки"""
-    def __init__(self, reward_field, merge_field, is_positive):
+    def __init__(self, reward_field, merge_field, is_positive_field):
         self.reward_field = reward_field
         self.merge_field = merge_field
-        self.is_positive = is_positive
+        self.is_positive_field = is_positive_field
 
     def __call__(self, value):
-        is_positive = value.get(self.is_positive)
+        is_positive = value.get(self.is_positive_field)
         reward = value.get(self.reward_field)
         merge = value.get(self.merge_field)
 
@@ -29,9 +28,11 @@ class HabitValidator:
             raise ValidationError('Необходимо указать merge(приятную привычку) или reward(вознаграждение)!')
 
         try:
-            habit = Habit.objects.get(pk=merge.pk)
+            habit = Habit.objects.get(merge.pk)
             if not habit.is_positive:
                 raise ValidationError('Привычка не является приятной!')
         except Habit.DoesNotExist:
             raise ValidationError('Привычка не найдена!')
+
+
 

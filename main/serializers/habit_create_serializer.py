@@ -5,8 +5,7 @@ from main.validators.time_to_complete_validator import TimeToCompleteValidator
 
 
 class HabitCreateSerializer(ModelSerializer):
-    """Сериализатор привычки"""
-
+    """Сериализатор создания привычки."""
     class Meta:
         model = Habit
         fields = '__all__'

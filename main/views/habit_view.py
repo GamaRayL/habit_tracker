@@ -1,16 +1,17 @@
+from main.models import Habit
 from rest_framework import status
 from rest_framework.response import Response
-
-from main.models import Habit
 from main.serializers.habit_serializer import HabitSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
+from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
 
 class HabitCurrentUserListAPIView(ListAPIView):
-    """Список привычек текущего пользователя."""
+    """Список привычек текущего пользователя (с пагинацией)."""
     queryset = Habit.objects.all()
     serializer_class = HabitSerializer
+    pagination_class = CurrentUserHabitsPagination
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)

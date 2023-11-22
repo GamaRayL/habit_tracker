@@ -12,5 +12,5 @@ class HabitCreateSerializer(ModelSerializer):
 
         validators = [
             HabitValidator(reward_field='reward', merge_field='merge', is_positive_field='is_positive'),
-            TimeToCompleteValidator(time_field='time_to_complete')
+            TimeToCompleteValidator(time_field='time_to_complete'),
         ]

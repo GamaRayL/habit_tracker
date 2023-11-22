@@ -13,6 +13,6 @@ USER_ROLES = {
 }
 
 FREQUENCY = {
-    'daily': DAY,
-    'weekly': WEEK,
+    'день': DAY,
+    'неделя': WEEK,
 }

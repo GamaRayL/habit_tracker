@@ -1,6 +1,6 @@
 from django.db import models
 from users.models import User
-from constants import FREQUENCY, DAILY, NULLABLE
+from constants import FREQUENCY, DAY, NULLABLE
 
 
 class Habit(models.Model):
@@ -23,7 +23,7 @@ class Habit(models.Model):
                               help_text='Привычка, которая связана с другой привычкой (важно указывать для полезных '
                                         'привычек, но не для приятных)')
     frequency = models.CharField(max_length=10,
-                                 choices=FREQUENCY.items(), default=DAILY,
+                                 choices=FREQUENCY.items(), default=DAY,
                                  verbose_name='периодичность',
                                  help_text='Периодичность выполнения привычки для напоминания в днях')
     reward = models.CharField(max_length=100, **NULLABLE,

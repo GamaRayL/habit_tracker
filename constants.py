@@ -1,9 +1,8 @@
 ADMIN = 'администратор'
 MEMBER = 'участник'
 
-DAILY = 'день'
-WEEKLY = 'неделя'
-MONTHLY = 'месяц'
+DAY = 'день'
+WEEK = 'неделя'
 
 # Dictionary
 NULLABLE = {'null': True, 'blank': True}
@@ -14,7 +13,6 @@ USER_ROLES = {
 }
 
 FREQUENCY = {
-    'daily': DAILY,
-    'weekly': WEEKLY,
-    'monthly': MONTHLY,
+    'daily': DAY,
+    'weekly': WEEK,
 }

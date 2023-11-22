@@ -1,16 +1,14 @@
-from django.http import JsonResponse
-from rest_framework import status
-from rest_framework.generics import CreateAPIView, get_object_or_404
-from rest_framework.response import Response
-from rest_framework.reverse import reverse
-from rest_framework_simplejwt.views import TokenObtainPairView
-
-from users.models import User
-from users.serializers.token_obtain import MyTokenObtainPairSerializer
-from users.serializers.user import UserSerializer
 import uuid
-
+from users.models import User
+from rest_framework import status
+from django.http import JsonResponse
+from rest_framework.reverse import reverse
+from rest_framework.response import Response
+from users.serializers.user import UserSerializer
 from users.services import send_confirm_register_mail
+from rest_framework_simplejwt.views import TokenObtainPairView
+from rest_framework.generics import CreateAPIView, get_object_or_404
+from users.serializers.token_obtain import MyTokenObtainPairSerializer
 
 
 class MyTokenObtainPairAPIView(TokenObtainPairView):

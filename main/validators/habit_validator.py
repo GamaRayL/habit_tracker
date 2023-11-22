@@ -27,12 +27,13 @@ class HabitValidator:
         if not reward and not merge:
             raise ValidationError('Необходимо указать merge(приятную привычку) или reward(вознаграждение)!')
 
-        try:
-            habit = Habit.objects.get(merge.pk)
-            if not habit.is_positive:
-                raise ValidationError('Привычка не является приятной!')
-        except Habit.DoesNotExist:
-            raise ValidationError('Привычка не найдена!')
+        if not reward:
+            try:
+                habit = Habit.objects.get(pk=merge.pk)
+                if not habit.is_positive:
+                    raise ValidationError('Привычка не является приятной!')
+            except Habit.DoesNotExist:
+                raise ValidationError('Привычка не найдена!')
 
 
 

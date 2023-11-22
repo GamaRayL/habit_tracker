@@ -3,7 +3,7 @@ from rest_framework import status
 from rest_framework.response import Response
 
 from main.permissions.is_owner import IsOwner
-from main.serializers.habit_serializer import HabitSerializer
+from main.serializers.habit_serializer import HabitListSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
 from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
@@ -12,7 +12,7 @@ from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, D
 class HabitCurrentUserListAPIView(ListAPIView):
     """Список привычек текущего пользователя (с пагинацией)."""
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitListSerializer
     pagination_class = CurrentUserHabitsPagination
 
     def get_queryset(self):
@@ -22,7 +22,7 @@ class HabitCurrentUserListAPIView(ListAPIView):
 class HabitPublicListAPIView(ListAPIView):
     """Список публичных привычек."""
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitListSerializer
 
     def get_queryset(self):
         return self.queryset.filter(is_public=True)
@@ -39,7 +39,7 @@ class HabitCreateAPIView(CreateAPIView):
 class HabitUpdateAPIView(UpdateAPIView):
     """Редактирование привычки."""
     queryset = Habit.objects.all()
-    serializer_class = HabitSerializer
+    serializer_class = HabitListSerializer
     permission_classes = [IsOwner]
 #     Каждый пользователь имеет доступ только к своим привычкам по механизму CRUD.
 

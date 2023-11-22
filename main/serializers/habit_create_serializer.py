@@ -1,11 +1,10 @@
-from rest_framework.serializers import ModelSerializer
-
 from main.models import Habit
+from rest_framework.serializers import ModelSerializer
 from main.validators.habit_validator import HabitValidator
 from main.validators.time_to_complete_validator import TimeToCompleteValidator
 
 
-class HabitSerializer(ModelSerializer):
+class HabitCreateSerializer(ModelSerializer):
     """Сериализатор привычки"""
 
     class Meta:

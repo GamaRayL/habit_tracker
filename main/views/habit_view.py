@@ -6,6 +6,7 @@ from main.serializers.habit_list_serializer import HabitListSerializer
 
 
 class HabitCreateAPIView(CreateAPIView):
+    """Добавление новой привычки."""
     serializer_class = HabitCreateSerializer
 
     def perform_create(self, serializer):
@@ -13,13 +14,20 @@ class HabitCreateAPIView(CreateAPIView):
 
 
 class HabitCurrentUserListAPIView(ListAPIView):
-    serializer_class = HabitListSerializer
+    """Список привычек текущего пользователя."""
     queryset = Habit.objects.all()
+    serializer_class = HabitListSerializer
 
     def get_queryset(self):
         return self.queryset.filter(user=self.request.user)
 
 
 class HabitPublicListAPIView(ListAPIView):
-    pass
+    """Список публичных привычек."""
+    queryset = Habit.objects.all()
+    serializer_class = HabitListSerializer
+
+    def get_queryset(self):
+        return self.queryset.filter(is_public=True)
+
 

@@ -35,8 +35,6 @@ class HabitPublicListAPIView(ListAPIView):
 class HabitCreateAPIView(CreateAPIView):
     """Добавление новой привычки."""
     serializer_class = HabitCreateSerializer
-    bot_token = '6795892672:AAEuABnRXf7MIXPhUMXqSl2rtMOdhaq8Mfg'
-    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)

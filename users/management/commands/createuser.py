@@ -5,7 +5,8 @@ from users.models import User
 
 
 class Command(BaseCommand):
-    """Команда для создания пользователя"""
+    help = 'Команда для создания пользователя.'
+
     def handle(self, *args, **options):
         try:
             email = input('Почта: ')

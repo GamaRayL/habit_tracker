@@ -10,9 +10,6 @@ from main.serializers.habit_create_serializer import HabitCreateSerializer
 from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
 from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
-from main.services.get_chat_if_from_tg import get_chat_id_from_tg
-from main.services.send_msg_to_tg import send_msg_to_tg
-
 
 class HabitCurrentUserListAPIView(ListAPIView):
     """Список привычек текущего пользователя (с пагинацией)."""
@@ -46,9 +43,6 @@ class HabitUpdateAPIView(UpdateAPIView):
     queryset = Habit.objects.all()
     serializer_class = HabitListSerializer
     permission_classes = [IsOwner]
-
-    def perform_update(self, serializer):
-        get_chat_id_from_tg()
 
 
 class HabitDeleteAPIView(DestroyAPIView):

@@ -6,4 +6,4 @@ from users.models import User
 class UserSerializer(ModelSerializer):
     class Meta:
         model = User
-        fields = ('email', 'password')
+        fields = ('email', 'password',  'tg_chat_id')

@@ -1,4 +1,7 @@
 import uuid
+
+from rest_framework.permissions import AllowAny
+
 from users.models import User
 from rest_framework import status
 from django.http import JsonResponse
@@ -18,6 +21,7 @@ class MyTokenObtainPairAPIView(TokenObtainPairView):
 class UserRegisterAPIView(CreateAPIView):
     """Регистрация пользователя"""
     serializer_class = UserSerializer
+    permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
         """Создание пользователя и передача в сервисный слой адреса для подтверждения почты пользователя."""

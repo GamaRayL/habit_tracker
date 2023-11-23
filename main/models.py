@@ -6,7 +6,7 @@ from constants import FREQUENCY, DAY, NULLABLE
 class Habit(models.Model):
     """Модель привычки"""
     user = models.ForeignKey(User, on_delete=models.CASCADE,
-                             **NULLABLE, related_name='habits',
+                             **NULLABLE, related_name='habit',
                              verbose_name='пользователь', help_text='Создатель привычки')
     place = models.CharField(max_length=50, verbose_name='место',
                              help_text='Место, в котором необходимо выполнять привычку')

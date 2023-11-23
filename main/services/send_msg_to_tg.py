@@ -1,27 +1,26 @@
 import requests
-from django.contrib.auth import get_user
-
-from config.settings import TG_URL, TG_CHAT_ID
-from main.models import Habit
+from users.models import User
+from constants import TG_SEND_MESSAGE
+from config.settings import TG_URL, TG_BOT_TOKEN
 
 
 def send_msg_to_tg():
-    # message = 'Hello World!'
-    # habits = Habit.objects.filter(user=user)
-    # print(get_user)
-    print(TG_URL)
+    users = User.objects.all()
+    url_post = TG_URL.format(TG_BOT_TOKEN, TG_SEND_MESSAGE)
 
-    try:
-        response = requests.post(TG_URL, json={'chat_id': 132093023, 'text': 'Маруся это твой чат ID 132093023, для регистрации. Привет от Гамида и спокойной ночи!)'})
-        print(response.text)
-    except Exception as e:
-        print(e)
+    print('Запуск команды...')
+    for user in users:
+        habits = user.habit.all()
+        chat_id = user.tg_chat_id
+        for habit in habits:
+            message = (f'Место: {habit.place}\n'
+                       f'Время начала: {habit.time_to_start}\n'
+                       f'Действие: {habit.action}\n'
+                       f'Награда: {habit.reward or habit.merge}\n'
+                       f'Время на выполнение: {habit.time_to_complete}\n')
 
-    # try:
-    #     url = 'https://api.telegram.org/bot6795892672:AAEuABnRXf7MIXPhUMXqSl2rtMOdhaq8Mfg/getUpdates'
-    #     # print(TG_URL)
-    #     response = requests.post(url)
-    #     print(response.json()['result'][-1]['message']['chat'])
-    # except Exception as e:
-    #     print(e)
-
+            try:
+                requests.post(url_post, json={'chat_id': chat_id, 'text': message})
+            except Exception as e:
+                print(f'Ошибка при отправке сообщения: {e}')
+    print('Отправка сообщений закончена.')

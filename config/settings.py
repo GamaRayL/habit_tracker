@@ -188,4 +188,4 @@ CELERY_TASK_TIME_LIMIT = 30 * 60
 # Telegram settings
 TG_CHAT_ID = os.getenv('TG_CHAT_ID')
 TG_BOT_TOKEN = os.getenv('TG_BOT_TOKEN')
-TG_URL = os.getenv('TG_URL').format(TG_BOT_TOKEN)
+TG_URL = os.getenv('TG_URL')

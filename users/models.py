@@ -42,7 +42,7 @@ class User(AbstractUser):
     username = None
 
     email = models.EmailField(unique=True, verbose_name='почта')
-    tg_chat_id = models.CharField(max_length=50, verbose_name='ID в телеграме')
+    # tg_chat_id = models.CharField(max_length=50, verbose_name='ID в телеграме')
     is_active = models.BooleanField(default=False, verbose_name='активен')
     key = models.CharField(max_length=100, **NULLABLE, verbose_name='ключ')
     role = models.CharField(max_length=20,

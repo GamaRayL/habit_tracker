@@ -17,7 +17,8 @@ def send_msg_to_tg():
                        f'Время начала: {habit.time_to_start}\n'
                        f'Действие: {habit.action}\n'
                        f'Награда: {habit.reward or habit.merge}\n'
-                       f'Время на выполнение: {habit.time_to_complete}\n')
+                       f'Время на выполнение: {habit.time_to_complete}\n'
+                       f'Периодичность: {habit.frequency}\n')
 
             try:
                 requests.post(url_post, json={'chat_id': chat_id, 'text': message})

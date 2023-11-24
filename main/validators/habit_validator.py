@@ -1,4 +1,3 @@
-from constants import FREQUENCY
 from main.models import Habit
 from rest_framework.serializers import ValidationError
 
@@ -14,7 +13,6 @@ class HabitValidator:
         is_positive = value.get(self.is_positive_field)
         reward = value.get(self.reward_field)
         merge = value.get(self.merge_field)
-        print(FREQUENCY.items())
 
         if is_positive and (reward or merge):
             raise ValidationError('У приятной привычки не может быть reward(вознаграждения)'

@@ -1,9 +1,6 @@
 ADMIN = 'администратор'
 MEMBER = 'участник'
 
-DAY = 'день'
-WEEK = 'неделя'
-
 # TG Methods
 TG_GET_UPDATES = 'getUpdates'
 TG_SEND_MESSAGE = 'sendMessage'
@@ -16,7 +13,12 @@ USER_ROLES = {
     'member': MEMBER
 }
 
-FREQUENCY = {
-    'день': DAY,
-    'неделя': WEEK,
-}
+FREQUENCY_CHOICES = [
+    (1, 'Каждый день'),
+    (2, 'Каждые 2 дня'),
+    (3, 'Каждые 3 дня'),
+    (4, 'Каждые 4 дня'),
+    (5, 'Каждые 5 дня'),
+    (6, 'Каждые 6 дня'),
+    (7, 'Каждую неделю'),
+]

@@ -13,6 +13,21 @@ USER_ROLES = {
     'member': MEMBER
 }
 
+EXPECTED_CREATE_DATA = {
+    "id": 1,
+    "place": "дом",
+    "time_to_start": "12:00:00",
+    "action": "делать курсовую",
+    "is_positive": False,
+    "frequency": 2,
+    "reward": "сон",
+    "time_to_complete": "00:02:00",
+    "is_public": False,
+    "user": 1,
+    "merge": None
+}
+
+# Lists
 FREQUENCY_CHOICES = [
     (1, 'Каждый день'),
     (2, 'Каждые 2 дня'),

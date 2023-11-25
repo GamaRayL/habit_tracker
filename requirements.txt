@@ -7,6 +7,7 @@ django_celery_beat
 redis
 requests
 django-cors-headers
+coverage
 python-dotenv
 drf-yasg
 ipython

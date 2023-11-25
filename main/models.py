@@ -33,4 +33,4 @@ class Habit(models.Model):
     is_public = models.BooleanField(default=False, verbose_name='признак публичности')
 
     def __str__(self):
-        return f'Я буду {self.action} в {self.time_to_start} в {self.place}'
+        return f'Я буду {self.action} в {self.time_to_start}. Место - {self.place}'

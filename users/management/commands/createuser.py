@@ -1,7 +1,5 @@
-from django.core.management import BaseCommand
-
-from constants import MEMBER
 from users.models import User
+from django.core.management import BaseCommand
 
 
 class Command(BaseCommand):
@@ -17,6 +15,10 @@ class Command(BaseCommand):
             )
             user.save()
 
-            self.stdout.write(self.style.SUCCESS(f'Пользователь {email} успешно создан!'))
+            self.stdout.write(
+                self.style.SUCCESS(f'Пользователь {email} успешно создан!')
+            )
         except KeyboardInterrupt:
-            self.stdout.write(self.style.WARNING("\nПрограмма была прервана пользователем (Ctrl + C)"))
+            self.stdout.write(
+                self.style.WARNING("\nПрограмма была прервана пользователем.")
+            )

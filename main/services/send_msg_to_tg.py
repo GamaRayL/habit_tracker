@@ -1,7 +1,7 @@
 import requests
+from main.models import Habit
 from constants import TG_SEND_MESSAGE
 from config.settings import TG_URL, TG_BOT_TOKEN
-from main.models import Habit
 
 
 def send_msg_to_tg(habit_id):

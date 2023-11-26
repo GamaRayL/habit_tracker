@@ -15,17 +15,25 @@ class HabitValidator:
         merge = value.get(self.merge_field)
 
         if is_positive and (reward or merge):
-            raise ValidationError('У приятной привычки не может быть reward(вознаграждения)'
-                                  ' или merge(связанной привычки)!')
+            raise ValidationError(
+                'У приятной привычки не может быть reward(вознаграждения)'
+                ' или merge(связанной привычки)!'
+            )
 
         if is_positive:
             return True
 
         if reward and merge:
-            raise ValidationError('Нельзя одновременно выбрать merge(приятную привычку) и reward(вознаграждение)!')
+            raise ValidationError(
+                'Нельзя одновременно выбрать merge(приятную привычку) '
+                'и reward(вознаграждение)!'
+            )
 
         if not reward and not merge:
-            raise ValidationError('Необходимо указать merge(приятную привычку) или reward(вознаграждение)!')
+            raise ValidationError(
+                'Необходимо указать merge(приятную привычку) '
+                'или reward(вознаграждение)!'
+            )
 
         if not reward:
             try:
@@ -34,6 +42,3 @@ class HabitValidator:
                     raise ValidationError('Привычка не является приятной!')
             except Habit.DoesNotExist:
                 raise ValidationError('Привычка не найдена!')
-
-
-

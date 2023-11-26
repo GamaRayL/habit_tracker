@@ -1,12 +1,12 @@
 import requests
 from django.core.management import BaseCommand
-
 from config.settings import TG_URL, TG_BOT_TOKEN
 from constants import TG_GET_UPDATES, TG_SEND_MESSAGE
 
 
 class Command(BaseCommand):
-    help = 'Команда для получения chat ID из Telegram бота и отправка его обратно.'
+    help = ('Команда для получения chat ID из Telegram бота '
+            'и отправка его обратно.')
 
     def handle(self, *args, **options):
         try:

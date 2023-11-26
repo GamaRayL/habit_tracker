@@ -1,9 +1,9 @@
 from django.db import models
 from django.apps import apps
-from constants import USER_ROLES, MEMBER, ADMIN, NULLABLE
 from django.contrib.auth.models import AbstractUser
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.base_user import BaseUserManager
+from constants import USER_ROLES, MEMBER, ADMIN, NULLABLE
 
 
 class UserManager(BaseUserManager):
@@ -42,7 +42,8 @@ class User(AbstractUser):
     username = None
 
     email = models.EmailField(unique=True, verbose_name='почта')
-    tg_chat_id = models.CharField(max_length=20, **NULLABLE, verbose_name='ID в телеграме')
+    tg_chat_id = models.CharField(max_length=20, **NULLABLE,
+                                  verbose_name='ID в телеграме')
     is_active = models.BooleanField(default=False, verbose_name='активен')
     key = models.CharField(max_length=100, **NULLABLE, verbose_name='ключ')
     role = models.CharField(max_length=20,

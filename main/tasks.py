@@ -12,7 +12,9 @@ def task_send_msg_to_tg(habit_id):
 
 for habit in Habit.objects.all():
     habit_time = datetime.combine(datetime.today(), habit.time_to_start)
-    previous_tasks = PeriodicTask.objects.filter(name__contains=f'ID задачи {habit.id}')
+    previous_tasks = PeriodicTask.objects.filter(
+        name__contains=f'ID задачи {habit.id}'
+    )
     previous_tasks.delete()
 
     if datetime.now() < habit_time:
@@ -30,4 +32,3 @@ for habit in Habit.objects.all():
             args=[habit.id],
             start_time=habit_time - timedelta(seconds=15)
         )
-

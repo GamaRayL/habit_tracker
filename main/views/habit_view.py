@@ -1,14 +1,13 @@
-from django.http import request
-
 from main.models import Habit
 from rest_framework import status
 from rest_framework.response import Response
-
 from main.permissions.is_owner import IsOwner
 from main.serializers.habit_serializer import HabitListSerializer
 from main.serializers.habit_create_serializer import HabitCreateSerializer
-from main.paginations.current_user_habits_pagination import CurrentUserHabitsPagination
-from rest_framework.generics import CreateAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
+from main.paginations.current_user_habits_pagination import \
+    CurrentUserHabitsPagination
+from rest_framework.generics import CreateAPIView, ListAPIView, \
+    UpdateAPIView, DestroyAPIView
 
 
 class HabitCurrentUserListAPIView(ListAPIView):
@@ -50,7 +49,10 @@ class HabitDeleteAPIView(DestroyAPIView):
     queryset = Habit.objects.all()
     permission_classes = [IsOwner]
 
-    def delete(self, request, *args, **kwargs):
+    def delete(self, *args, **kwargs):
         habit = self.get_object()
         habit.delete()
-        return Response({'message': 'Привычка удалена.'}, status=status.HTTP_204_NO_CONTENT)
+        return Response(
+            {'message': 'Привычка удалена.'},
+            status=status.HTTP_204_NO_CONTENT
+        )

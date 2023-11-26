@@ -16,7 +16,8 @@ class UserAPITestCase(TestCase):
     def test_user_register(self) -> None:
         """Тестирование регистрации нового пользователя."""
         response = self.client.post('/users/register/', data=self.data)
-        self.assertEqual(response.json(), {'message': 'Пользователь успешно создан'})
+        self.assertEqual(response.json(),
+                         {'message': 'Пользователь успешно создан'})
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
 
     def test_verify_email(self) -> None:
@@ -27,10 +28,11 @@ class UserAPITestCase(TestCase):
         url = reverse('users:verify_email', args=[user.key])
 
         response_verify = self.client.post(url)
-        self.assertEqual(response_verify.json(), {'message': 'Email successfully confirmed'})
+        self.assertEqual(response_verify.json(),
+                         {'message': 'Email successfully confirmed'})
         self.assertEqual(response_verify.status_code, status.HTTP_200_OK)
 
-    def test_token_obtain_pair(self) -> None:
+    def test_token_obtain(self) -> None:
         """Тестирование получения токена пользователя."""
         self.client.post('/users/register/', data=self.data)
 

@@ -4,7 +4,8 @@ from django.core.mail import EmailMessage
 
 def send_confirm_register_mail(user, absolute_verify_email_url):
     """Отправка письма со ссылкой для подтверждения почты пользователя"""
-    message = (f'Вы зарегистрировались на нашей платформе. Для продолжения регистрации перейдите по '
+    message = (f'Вы зарегистрировались на нашей платформе. '
+               f'Для продолжения регистрации перейдите по '
                f'<a href="{absolute_verify_email_url}">ссылке</a>')
 
     email = EmailMessage(

@@ -2,7 +2,8 @@ from main.models import Habit
 from users.models import User
 from rest_framework import status
 from rest_framework.test import APITestCase
-from constants import EXPECTED_CREATE_DATA, EXPECTED_DATA, EXPECTED_CURRENT_HABIT_LIST, EXPECTED_UPDATE_DATA
+from constants import EXPECTED_CREATE_DATA, EXPECTED_DATA, \
+    EXPECTED_CURRENT_HABIT_LIST, EXPECTED_UPDATE_DATA
 
 
 class HabitAPITestCase(APITestCase):
@@ -68,7 +69,9 @@ class HabitAPITestCase(APITestCase):
             'time_to_complete': '00:01',
         }
 
-        response = self.client.patch(f'/habits/update/{self.habit.id}/', data=data)
+        response = self.client.patch(
+            f'/habits/update/{self.habit.id}/', data=data
+        )
         self.assertEqual(response.json(), EXPECTED_UPDATE_DATA)
         self.assertEqual(response.status_code, status.HTTP_200_OK)
 

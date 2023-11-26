@@ -1,5 +1,4 @@
 from django.core.management import BaseCommand
-
 from main.services.send_msg_to_tg import send_msg_to_tg
 
 

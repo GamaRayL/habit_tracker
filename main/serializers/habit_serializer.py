@@ -1,5 +1,3 @@
-from rest_framework.relations import SlugRelatedField
-
 from main.models import Habit
 from rest_framework.serializers import ModelSerializer
 
@@ -19,4 +17,5 @@ class HabitListSerializer(ModelSerializer):
     class Meta:
         model = Habit
         fields = ('id', 'place', 'time_to_start', 'action', 'is_positive',
-                  'frequency', 'reward', 'time_to_complete', 'is_public', 'user', 'merge')
+                  'frequency', 'reward', 'time_to_complete', 'is_public',
+                  'user', 'merge')

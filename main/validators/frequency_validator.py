@@ -9,5 +9,6 @@ class FrequencyValidator:
         frequency = value.get(self.frequency_field)
 
         if frequency <= 1 or frequency >= 7:
-            raise ValidationError(f'Периодичность должна быть в диапазоне от 1 до 7 (дни)')
-
+            raise ValidationError(
+                'Периодичность должна быть в диапазоне от 1 до 7 (дни)'
+            )

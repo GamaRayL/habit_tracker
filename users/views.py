@@ -22,16 +22,19 @@ class UserRegisterAPIView(CreateAPIView):
     permission_classes = [AllowAny]
 
     def create(self, request, *args, **kwargs):
-        """Создание пользователя и передача в сервисный слой адреса для подтверждения почты пользователя."""
+        """Создание пользователя.
+        Передача в сервисный слой адреса для подтверждения почты."""
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = self.perform_create(serializer)
 
-        verify_email_url = reverse('users:verify_email', args=[user.key])
-        absolute_verify_email_url = request.build_absolute_uri(verify_email_url)
+        _verify_email = reverse('users:verify_email', args=[user.key])
+        absolute_verify_email_url = request.build_absolute_uri(_verify_email)
         send_confirm_register_mail(user, absolute_verify_email_url)
 
-        return Response({'message': 'Пользователь успешно создан'}, status=status.HTTP_201_CREATED)
+        return Response(
+            {'message': 'Пользователь успешно создан'},
+            status=status.HTTP_201_CREATED)
 
     def perform_create(self, serializer):
         """Сохранение пользователя в базе данных."""
@@ -50,6 +53,10 @@ def verify_email(request, key):
     if not user.is_active:
         user.is_active = True
         user.save()
-        return JsonResponse({'message': 'Email successfully confirmed'}, status=status.HTTP_200_OK)
+        return JsonResponse(
+            {'message': 'Email successfully confirmed'},
+            status=status.HTTP_200_OK)
     else:
-        return JsonResponse({'message': 'Email already confirmed'}, status=status.HTTP_400_BAD_REQUEST)
+        return JsonResponse(
+            {'message': 'Email already confirmed'},
+            status=status.HTTP_400_BAD_REQUEST)

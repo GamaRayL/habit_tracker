@@ -7,7 +7,7 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):
-    """Менеджер под создание пользователей"""
+    """Менеджер под создание пользователя."""
     use_in_migrations = True
 
     def _create_user(self, email, password, **extra_fields):
@@ -38,7 +38,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
-    """Модель пользователя"""
+    """Модель пользователя."""
     username = None
 
     email = models.EmailField(unique=True, verbose_name='почта')

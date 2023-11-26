@@ -1,12 +1,10 @@
 import uuid
-
-from rest_framework.permissions import AllowAny
-
 from users.models import User
 from rest_framework import status
 from django.http import JsonResponse
 from rest_framework.reverse import reverse
 from rest_framework.response import Response
+from rest_framework.permissions import AllowAny
 from users.serializers.user import UserSerializer
 from users.services import send_confirm_register_mail
 from rest_framework_simplejwt.views import TokenObtainPairView
